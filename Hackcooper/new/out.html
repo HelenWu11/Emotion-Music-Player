@@ -1,0 +1,285 @@
+<html>
+<head>
+<meta charset="utf-8">
+<title>Byte MakeUp</title>
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style1.css') }}">
+<link href='http://fonts.googleapis.com/css?family=Great+Vibes' rel='stylesheet' type='text/css'>
+
+<body>
+<!--
+<audio>
+<embed height="60" type="audio/midi" width="144" src="music.mp3" volume="60" loop="true" autostart="true" />
+</audio>
+
+<audio autoplay="autoplay" controls="controls" loop="loop" preload="auto">
+              <source src="music.MP3" type="audio/mpeg">
+</audio>
+
+<style type="text/css">
+     audio{
+             display: none;
+         }
+</style>-->
+
+<div id="container">
+    <video autoplay="true" id="videoElement"></video>
+	<canvas id="canvas" width=700 height=500></canvas>
+</div>
+
+<style type="text/css">
+#logo{
+  font-family: 'Open Sans', sans-serif;
+  color: indigo;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -3px;
+  line-height: 1;
+  text-shadow: #EDEDED 3px 2px 0;
+  width:600px;
+  bottom:75px;
+  right:85px;
+  text-align:right;
+  position: absolute;
+}
+</style>
+
+<div id="warming">
+  <h2 id="logo">Please take off your glasses and come close to the camera!</h2>
+</div>
+
+<div id="label">
+  <!--
+ <div id="occasion">
+ <p><br /><br /><br /><br /><br />CASUAL</p>
+ <p>DATE</p>
+ <p>BUSINESS<br /><br /><br /><br /></p>
+ </div>
+
+ <div id="skin_type">
+ <p>Oily</p>
+ <p>Dry</p>
+ <p>Combination</p>
+ <p>Sensitive</p>
+ </div>-->
+ <style type="text/css">
+  #screenshot {
+    bottom:65px;
+    left:130px;
+    position:absolute;
+    background-color: #bbb;
+    padding: .5em;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 6px;
+    color: #fff;
+    font-family: 'Oswald';
+    font-size: 20px;
+    text-decoration: none;
+    border: none;
+  }
+
+  #screenshot:hover {
+    bottom:65px;
+    left:130px;
+    position:absolute;
+    border: none;
+    background: pink;
+    box-shadow: 0px 0px 1px #777;
+  }
+</style>
+<button id="screenshot">Screenshot!</button>
+
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    outline: none;
+
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+div.wrapper {
+  margin: 20px auto;
+  width: 200px;
+}
+
+nav.vertical {
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0,0,0,.15);
+  overflow: hidden;
+  text-align: center;
+}
+
+  nav.vertical > ul {
+    list-style-type: none;
+  }
+
+    nav.vertical > ul > li {
+      display: block;
+    }
+
+      nav.vertical > ul > li > a {
+        background-color: rgb(157, 34, 60);
+        background-image: -webkit-linear-gradient(135deg, rgb(114, 51, 98), rgb(157, 34, 60));
+        background-image: -moz-linear-gradient(135deg, rgb(114, 51, 98), rgb(157, 34, 60));
+        background-image: -o-linear-gradient(135deg, rgb(114, 51, 98), rgb(157, 34, 60));
+        background-image: linear-gradient(135deg, rgb(114, 51, 98), rgb(157, 34, 60));
+        border-bottom: 1px solid rgba(255,255,255,.1);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.1), 0 1px 1px rgba(0,0,0,.1);
+        color: rgb(255,255,255);
+        display: block;
+        font-size: 16pt;
+        font-weight: 500;
+        height: 50px;
+        line-height: 50px;
+        text-shadow: 0 1px 1px rgba(0,0,0,.1);
+        transition: all .1s ease;
+        text-decoration: none;
+      }
+
+        nav.vertical > ul > li > a:hover {
+         background-color: rgb(114, 51, 98);
+         background-image: -webkit-linear-gradient(150deg, rgb(114, 51, 98), rgb(114, 51, 98));
+         background-image: -moz-linear-gradient(150deg, rgb(114, 51, 98), rgb(114, 51, 98));
+         background-image: -o-linear-gradient(150deg, rgb(114, 51, 98), rgb(114, 51, 98));
+         background-image: linear-gradient(150deg, rgb(114, 51, 98), rgb(114, 51, 98));
+         cursor: pointer;
+        }
+
+          nav.vertical > ul > li > div {
+            background-color: rgb(255,255,255);
+          }
+
+          nav.vertical > ul > li > div > ul {
+            list-style-type: none;
+          }
+
+            nav.vertical > ul > li > div > ul > li > a {
+             background-color: rgb(255,255,255);
+             border-bottom: 1px solid rgba(0,0,0,.05);
+             color: #333331;
+             display: block;
+             font-size: 1.1rem;
+             padding: 10px 0;
+             text-decoration: none;
+             transition: all 0.15s linear;
+            }
+
+              nav.vertical > ul > li > div > ul > li:hover > a {
+                background-color: lightBlue;
+                color: rgb(255,255,255);
+                padding: 10px 0 10px 50px;
+              }
+
+</style>
+<body>
+<div class="wrapper">
+  <nav class="vertical">
+    <ul>
+      <li><a href="#">Skin Prep</a></li>
+    <li><a href="#">Foundation</a></li>
+    <li><a href="#">Concealer</a></li>
+    <li><a href="#">Eyebrow</a></li>
+    <li><a href="#">Eyeliner</a></li>
+    <li><a href="#">Mascara</a></li>
+    <li><a href="#">Eyeshadow</a></li>
+    <li><a href="#">Shadow</a></li>
+    <li><a href="#">Highlighter</a></li>
+    <li><a href="#">Blush</a></li>
+    <li><a href="#">Lips</a></li>
+    <li><a href="#">Spray Or Powder</a></li>
+          </ul>
+  </nav>
+</div>
+
+ <!--<div>
+<style>
+.link_button {
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border: solid 1px #20538D;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
+    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+    background: #4479BA;
+    color: #FFF;
+    padding: 8px 12px;
+    text-decoration: none;
+}
+</style>
+
+ <a id="url1" target="_blank" class="link_button">eyebrow</a>
+ <p><br /></p>
+ <a id="url2" target="_blank" class="link_button">lip</a>
+ <p><br /></p>
+ <a id="url3" target="_blank" class="link_button">eyelash</a>
+ <p><br /></p>
+  <a id="url4" target="_blank" class="link_button">freckle</a>
+  <p><br /></p>
+  <a id="url5" target="_blank" class="link_button">wrinkle</a>
+ </div>-->
+
+</div>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/json2/20160511/json2.js"></script>
+<script>
+ var video = document.querySelector("#videoElement");
+ const canvas = document.getElementById('canvas');
+ const context = canvas.getContext('2d');
+ const captureButton = document.getElementById('screenshot');
+
+if (navigator.mediaDevices.getUserMedia) {
+    navigator.mediaDevices.getUserMedia({video: true})
+  .then(function(stream) {
+    video.srcObject = stream;
+	 captureButton.addEventListener('click', () => {
+    context.drawImage(videoElement, 0, 0, canvas.width, canvas.height,10, 10, canvas.width-100, canvas.height-100,);
+
+    var photo = document.getElementById("canvas");
+    //var img = photo.toDataURL("image/png");
+    var img = photo.toDataURL();
+
+    $.ajax({
+      type: "POST",
+      url: "http://127.0.0.1:8080/upload_photo",
+      data: { photo: img}
+    }).done(function( response ) {
+          jsonresponse = $.parseJSON(response);
+          var eyebrow = jsonresponse.labels["eyebrow"];
+          var lip = jsonresponse.labels["lip"];
+          var eyelash = jsonresponse.labels["eyelash"];
+          var freckle = jsonresponse.labels["freckle"];
+          var wrinkle = jsonresponse.labels["wrinkle"];
+          document.getElementById("url1").href = eyebrow;
+          document.getElementById("url2").href = lip;
+          document.getElementById("url3").href = eyelash;
+          document.getElementById("url4").href = freckle;
+          document.getElementById("url5").href = wrinkle;
+          //document.getElementById("demo").innerHTML = eyebrow;
+
+          //console.log(jsonresponse.labels);
+          //console.log(jsonresponse.faces);
+
+          //alert(jsonresponse.labels);
+          //alert(jsonresponse.faces);
+    });
+    //document.write('< img src="'+img+'"/>');
+
+  });
+  })
+  .catch(function(error) {
+    console.log("Something went wrong!");
+  });
+}
+</script>
+
+</body>
+</html>

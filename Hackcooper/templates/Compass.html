@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>Compass</title>
+
+  <style type= "text/css">
+    document.body.style.backgroundImage="bg.jpg";
+  </style>
+
+  <link href='http://fonts.googleapis.com/css?family=Great+Vibes' rel='stylesheet' type='text/css'>
+
+</head>
+
+
+
+
+
+<body>
+
+
+<div id="container">
+    <video autoplay="true" id="videoElement"></video>
+	<canvas id="canvas" width=700 height=500></canvas>
+</div>
+
+<style type="text/css">
+#logo{
+  font-family: 'Open Sans', sans-serif;
+  color: indigo;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -3px;
+  line-height: 1;
+  text-shadow: #EDEDED 3px 2px 0;
+  width:600px;
+  bottom:75px;
+  right:85px;
+  text-align:right;
+  position: absolute;
+}
+</style>
+
+
+<div id="label">
+ <style type="text/css">
+  #screenshot {
+    bottom:65px;
+    left:130px;
+    position:absolute;
+    background-color: #bbb;
+    padding: .5em;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 6px;
+    color: #fff;
+    font-family: 'Oswald';
+    font-size: 20px;
+    text-decoration: none;
+    border: none;
+  }
+
+  #screenshot:hover {
+    bottom:65px;
+    left:130px;
+    position:absolute;
+    border: none;
+    background: pink;
+    box-shadow: 0px 0px 1px #777;
+  }
+</style>
+<button id="screenshot">Screenshot!</button>
+
+
+</div>
+
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/json2/20160511/json2.js"></script>
+<script>
+ var video = document.querySelector("#videoElement");
+ const canvas = document.getElementById('canvas');
+ const context = canvas.getContext('2d');
+ const captureButton = document.getElementById('screenshot');
+
+if (navigator.mediaDevices.getUserMedia) {
+    navigator.mediaDevices.getUserMedia({video: true})
+  .then(function(stream) {
+    video.srcObject = stream;
+	 captureButton.addEventListener('click', () => {
+    context.drawImage(videoElement, 0, 0, canvas.width, canvas.height,10, 10, canvas.width-100, canvas.height-100);
+    //context.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+
+    var photo = document.getElementById("canvas");
+    //var img = photo.toDataURL("image/png");
+    var img = photo.toDataURL();
+
+    $.ajax({
+      type: "POST",
+      url: "http://127.0.0.1:8080/upload_photo",
+      data: { photo: img}
+    }).done(function( response ) {
+      js = $.parseJSON(response)
+      if(js == "party"){
+        window.open("https://www.youtube.com/results?search_query=music+party");
+      }
+      else if(js == "pop"){
+        window.open("https://www.youtube.com/results?search_query=music+pop");
+      }
+      else if(js == "reliefing"){
+        window.open("https://www.youtube.com/results?search_query=music+reliefing");
+      }
+      else if(js == "relax"){
+        window.open("https://www.youtube.com/results?search_query=music+relax");
+      }
+      else if(js == "freaking"){
+        window.open("https://www.youtube.com/results?search_query=music+freaking");
+      }
+      else if(js == "surprise"){
+        window.open("https://www.youtube.com/results?search_query=music+surprise");
+      }
+      else if(js == "encouraging"){
+        window.open("https://www.youtube.com/results?search_query=music+encouraging");
+      }
+      else if(js == "comfort"){
+        window.open("https://www.youtube.com/results?search_query=music+comfort");
+      }
+
+      else if(js == "NULL"){
+        console.log("the wrong anwseer");
+      }
+
+
+    });
+
+
+  });
+  })
+  .catch(function(error) {
+    console.log("Something went wrong!");
+  });
+}
+</script>
+
+</body>
+</html>
